@@ -11,8 +11,6 @@ from bot.helper.ext_utils.exceptions import DirectDownloadLinkException
 import random
 import string
 
-
-@new_thread
 def cloneNode(update, context):
     args = update.message.text.split(" ", maxsplit=1)
     reply_to = update.message.reply_to_message
