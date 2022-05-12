@@ -412,10 +412,10 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
         except DirectDownloadLinkException as e:
             LOGGER.info(e)
             if "ERROR:" in str(e):
-                sendMessage(f"{e}", bot, update)
+                sendMessage(str(e), bot, update)
                 return
             if "Youtube" in str(e):
-                sendMessage(f"{e}", bot, update)
+                sendMessage(str(e), bot, update)
                 return
 
     listener = MirrorListener(bot, update, pswd, isTar, extract, isZip, isQbit, isLeech)
