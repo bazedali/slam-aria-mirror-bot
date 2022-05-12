@@ -23,13 +23,13 @@ def cloneNode(update, context):
             return
         gdtot_link = is_gdtot_link(link)
         if gdtot_link:
-        try:
-            msg = sendMessage(f"Processing: <code>{link}</code>", context.bot, update)
-            link = gdtot(link)
-            deleteMessage(context.bot, msg)
-        except DirectDownloadLinkException as e:
-            deleteMessage(context.bot, msg)
-            return sendMessage(str(e), context.bot, update)
+            try:
+                msg = sendMessage(f"Processing: <code>{link}</code>", context.bot, update)
+                link = gdtot(link)
+                deleteMessage(context.bot, msg)
+            except DirectDownloadLinkException as e:
+                deleteMessage(context.bot, msg)
+                return sendMessage(str(e), context.bot, update)
         if STOP_DUPLICATE:
             LOGGER.info('Checking File/Folder if already in Drive...')
             smsg, button = gd.drive_list(name, True, True)
