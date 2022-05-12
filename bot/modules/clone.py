@@ -14,13 +14,13 @@ import string
 
 def cloneNode(update, context):
     args = update.message.text.split(" ", maxsplit=1)
+    reply_to = update.message.reply_to_message
     if len(args) > 1:
         link = args[1]
-        gd = gdriveTools.GoogleDriveHelper()
-        res, size, name, files = gd.clonehelper(link)
-        if res != "":
-            sendMessage(res, context.bot, update)
-            return
+    elif reply_to is not None:
+        link = reply_to.text
+    else:
+        link = ''
         gdtot_link = is_gdtot_link(link)
         if gdtot_link:
             try:
