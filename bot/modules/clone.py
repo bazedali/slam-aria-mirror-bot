@@ -38,7 +38,7 @@ def cloneNode(update, context):
                 deleteMessage(context.bot, msg)
                 return sendMessage(str(e), context.bot, update)
         if STOP_DUPLICATE:
-            LOGGER.info('Checking File/Folder if already in Drive...')
+                          LOGGER.info('Checking File/Folder if already in Drive...')
             smsg, button = gd.drive_list(name, True, True)
             if smsg:
                 msg3 = "File/Folder is already available in Drive.\nHere are the search results:"
