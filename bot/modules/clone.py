@@ -21,22 +21,22 @@ def cloneNode(update, context):
             tag = f"@{update.message.from_user.username}"
         else:
             tag = update.message.from_user.mention_html(update.message.from_user.first_name)
-    if reply_to is not None:
-        if len(link) == 0:
-            link = reply_to.text
-        if reply_to.from_user.username:
-            tag = f"@{reply_to.from_user.username}"
-        else:
-            tag = reply_to.from_user.mention_html(reply_to.from_user.first_name)
-    gdtot_link = is_gdtot_link(link)
-    if gdtot_link:
-            try:
-                msg = sendMessage(f"Processing: <code>{link}</code>", context.bot, update)
-                link = gdtot(link)
-                deleteMessage(context.bot, msg)
-            except DirectDownloadLinkException as e:
-                deleteMessage(context.bot, msg)
-                return sendMessage(str(e), context.bot, update)
+        if reply_to is not None:
+            if len(link) == 0:
+                link = reply_to.text
+            if reply_to.from_user.username:
+                tag = f"@{reply_to.from_user.username}"
+            else:
+                tag = reply_to.from_user.mention_html(reply_to.from_user.first_name)
+        gdtot_link = is_gdtot_link(link)
+        if gdtot_link:
+                try:
+                    msg = sendMessage(f"Processing: <code>{link}</code>", context.bot, update)
+                    link = gdtot(link)
+                    deleteMessage(context.bot, msg)
+                except DirectDownloadLinkException as e:
+                    deleteMessage(context.bot, msg)
+                    return sendMessage(str(e), context.bot, update)
             if STOP_DUPLICATE:
                 LOGGER.info('Checking File/Folder if already in Drive...')
                 smsg, button = gd.drive_list(name, True, True)
@@ -86,7 +86,6 @@ def cloneNode(update, context):
             else:
                 sendMarkup(result + cc, context.bot, update, button)
     else:
-        sendMessage('Provide G-Drive Shareable Link to Clone.', context.bot, update)
-
+        sendMessage('Send Gdrive or gdtot link along with command or by replying to the link by command', context.bot, update)
 clone_handler = CommandHandler(BotCommands.CloneCommand, cloneNode, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 dispatcher.add_handler(clone_handler)
