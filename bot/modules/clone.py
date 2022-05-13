@@ -14,6 +14,7 @@ import string
 def cloneNode(update, context):
     args = update.message.text.split(" ", maxsplit=1)
     gd = gdriveTools.GoogleDriveHelper()
+    res, size, name, files = gd.clonehelper(link)
     reply_to = update.message.reply_to_message
     link = ''
     if len(args) > 1:
