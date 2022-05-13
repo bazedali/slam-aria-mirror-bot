@@ -17,6 +17,7 @@ def cloneNode(update, context):
     link = ''
     if len(args) > 1:
         link = args[1]
+        gd = gdriveTools.GoogleDriveHelper()
         if update.message.from_user.username:
             tag = f"@{update.message.from_user.username}"
         else:
