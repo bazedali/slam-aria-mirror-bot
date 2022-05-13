@@ -13,12 +13,15 @@ import string
 
 def cloneNode(update, context):
     args = update.message.text.split(" ", maxsplit=1)
-    gd = gdriveTools.GoogleDriveHelper()
-    res, size, name, files = gd.clonehelper(link)
     reply_to = update.message.reply_to_message
     link = ''
     if len(args) > 1:
         link = args[1]
+        gd = gdriveTools.GoogleDriveHelper()
+        res, size, name, files = gd.clonehelper(link)
+        if res != "":
+            sendMessage(res, context.bot, update)
+            return
         if update.message.from_user.username:
             tag = f"@{update.message.from_user.username}"
         else:
